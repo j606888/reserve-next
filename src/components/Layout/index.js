@@ -13,21 +13,25 @@ const LIST_ITEMS = [
   {
     label: '預約',
     icon: <EventIcon />,
+    href: '/',
   },
   {
-    label: '課程',
+    label: '服務',
     icon: <ImportContactsIcon />,
+    href: '/services',
   },
   {
     label: '會員',
     icon: <PeopleIcon />,
+    href: '/members',
   },
   {
     label: '報表',
     icon: <AttachMoneyIcon />,
+    href: '/reports',
   },
 ]
-export default function MiniDrawer({ children}) {
+export default function Layout({ children}) {
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {

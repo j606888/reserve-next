@@ -9,7 +9,8 @@ import ListItemText from '@mui/material/ListItemText';
 import { styled, useTheme } from '@mui/material/styles';
 import List from '@mui/material/List';
 import MuiDrawer from '@mui/material/Drawer';
-
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -68,22 +69,13 @@ const StyledDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== '
   }),
 );
 
-const Drawer = ({ open, handleDrawerClose, items }) => {
-  const theme = useTheme();
-
-  return (<StyledDrawer variant="permanent" open={open}>
-    <DrawerHeader>
-      <IconButton onClick={handleDrawerClose}>
-        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-      </IconButton>
-    </DrawerHeader>
-    <Divider />
-    <List>
-      {items.map(({ label, icon }, index) => (
-        <ListItem key={label} disablePadding sx={{ display: 'block' }}>
-          <ListItemButton
-            sx={
-              {
+const DrawerItem = ({ label, icon, href, open, isSelected }) => {
+  return (
+    <ListItem key={label} disablePadding sx={{ display: 'block', backgroundColor: isSelected ? '#f0f0f0' : 'transparent' }}>
+          <Link href={href} style={{ textDecoration: 'none', color: '#333' }}>
+            <ListItemButton
+              sx={
+                {
                 minHeight: 48,
                 px: 2.5,
                 justifyContent: open ? 'initial' : 'center',
@@ -106,7 +98,24 @@ const Drawer = ({ open, handleDrawerClose, items }) => {
               sx={{ opacity: open ? 1 : 0 }}
             />
           </ListItemButton>
+          </Link>
         </ListItem>
+  )}
+
+const Drawer = ({ open, handleDrawerClose, items }) => {
+  const theme = useTheme();
+  const router = useRouter();
+
+  return (<StyledDrawer variant="permanent" open={open}>
+    <DrawerHeader>
+      <IconButton onClick={handleDrawerClose}>
+        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+      </IconButton>
+    </DrawerHeader>
+    <Divider />
+    <List>
+      {items.map(({ label, icon, href }, index) => (
+        <DrawerItem key={label} label={label} icon={icon} href={href} open={open} isSelected={href === router.pathname} />
       ))}
     </List>
   </StyledDrawer>);

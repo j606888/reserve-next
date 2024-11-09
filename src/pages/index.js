@@ -1,11 +1,11 @@
-import MiniDrawer from "@/components/Drawer";
+import Layout from "@/components/Layout";
 
 export default function Home() {
   return (
     <>
-      <MiniDrawer>
+      <Layout>
         <h1>安安你好</h1>
-      </MiniDrawer>
+      </Layout>
     </>
   );
 }
