@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
+import { PERIODS } from "./index";
 
 const NewService = ({ onSubmit}) => {
   const [open, setOpen] = useState(false);
@@ -60,20 +61,18 @@ const NewService = ({ onSubmit}) => {
           onChange={(e) => setPrice(e.target.value)}
         />
         <FormControl fullWidth sx={{ mt: 2 }}>
-          <InputLabel id="demo-simple-select-label">時間(分鐘)</InputLabel>
+          <InputLabel id="demo-simple-select-label">時間</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="period"
             name="period"
-            label="時間(分鐘)"
+            label="時間"
             onChange={handleChange}
             value={period}
           >
-            <MenuItem value={15}>15</MenuItem>
-            <MenuItem value={30}>30</MenuItem>
-            <MenuItem value={60}>60</MenuItem>
-            <MenuItem value={90}>90</MenuItem>
-            <MenuItem value={120}>120</MenuItem>
+            {PERIODS.map(period => (
+              <MenuItem key={period} value={period}>{period}分鐘</MenuItem>
+            ))}
           </Select>
         </FormControl>
       </DialogContent>

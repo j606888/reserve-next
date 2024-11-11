@@ -32,15 +32,15 @@ const ServiceTable = ({ services, onDelete, onEdit }) => {
             <TableCell align="right">{service.price}</TableCell>
             <TableCell align="right">{service.period}</TableCell>
             <TableCell align="right">
+              <IconButton aria-label="edit" onClick={() => onEdit(service.id)}>
+                <EditIcon />
+              </IconButton>
               <IconButton aria-label="delete" onClick={() => {
                 if (window.confirm('確定要刪除此服務嗎？')) {
                   onDelete(service.id);
                 }
               }}>
                 <DeleteIcon />
-              </IconButton>
-              <IconButton aria-label="edit" onClick={() => onEdit(service.id)}>
-                <EditIcon />
               </IconButton>
             </TableCell>
           </TableRow>

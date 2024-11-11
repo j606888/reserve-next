@@ -11,6 +11,8 @@ const MOCK_SERVICES = [
   { id: 5, name: '全身去角質', price: 1350, period: 60 },
 ]
 
+export const PERIODS = [15, 30, 60, 90, 120];
+
 const ServiceListContainer = () => {
   const [services, setServices] = useState(MOCK_SERVICES);
   const [editServiceId, setEditServiceId] = useState(null);
