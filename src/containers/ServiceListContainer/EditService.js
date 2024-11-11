@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import { PERIODS } from "./index";
+
 const EditService = ({ service, onSave, onClose }) => {
   const [period, setPeriod] = useState(service.period);
   const [name, setName] = useState(service.name);
@@ -63,7 +64,7 @@ const EditService = ({ service, onSave, onClose }) => {
           fullWidth
           variant="standard"
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => setPrice(+e.target.value)}
         />
         <FormControl fullWidth sx={{ mt: 2 }}>
           <InputLabel id="demo-simple-select-label">時間</InputLabel>

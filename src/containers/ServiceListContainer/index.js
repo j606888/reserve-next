@@ -2,22 +2,25 @@ import { useState } from "react";
 import ServiceTable from "./ServiceTable";
 import NewService from "./NewService";
 import EditService from "./EditService";
-import { useGetServicesQuery } from "@/features/api/apiSlice";
+import { useGetServicesQuery, useCreateServiceMutation, useDeleteServiceMutation, useUpdateServiceMutation } from "@/features/api/apiSlice";
 
 export const PERIODS = [15, 30, 60, 90, 120];
 
 const ServiceListContainer = () => {
   const { data, isLoading } = useGetServicesQuery();
+  const [createService] = useCreateServiceMutation();
+  const [deleteService] = useDeleteServiceMutation();
+  const [updateService] = useUpdateServiceMutation();
   const services = data?.services;
   const [editServiceId, setEditServiceId] = useState(null);
   const editService = editServiceId ? services?.find(service => service.id === editServiceId) : null;
 
   const handleSubmit = (service) => {
-    setServices([...services, service]);
+    createService(service);
   }
 
   const handleDelete = (id) => {
-    setServices(services.filter(service => service.id !== id));
+    deleteService(id);
   }
 
   const handleEdit = (id) => {
@@ -25,7 +28,7 @@ const ServiceListContainer = () => {
   }
 
   const handleSave = (service) => {
-    setServices(services.map(s => s.id === service.id ? service : s));
+    updateService(service);
     setEditServiceId(null);
   }
 

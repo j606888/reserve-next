@@ -31,6 +31,13 @@ const NewService = ({ onSubmit}) => {
     <Dialog
       open={open}
       onClose={handleClose}
+      TransitionProps={{
+        onExited: () => {
+          setName('');
+          setPrice('');
+          setPeriod(15);
+        }
+      }}
       PaperProps={{
         component: 'form',
         onSubmit: handleSubmit,
@@ -58,7 +65,7 @@ const NewService = ({ onSubmit}) => {
           fullWidth
           variant="standard"
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => setPrice(+e.target.value)}
         />
         <FormControl fullWidth sx={{ mt: 2 }}>
           <InputLabel id="demo-simple-select-label">時間</InputLabel>
