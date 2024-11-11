@@ -1,11 +1,13 @@
-import MiniDrawer from "@/components/Drawer";
+import Layout from "@/components/Layout";
+import { Provider } from 'react-redux';
+import { store } from '@/app/store';
 
 export default function Home() {
   return (
-    <>
-      <MiniDrawer>
+    <Provider store={store}>
+      <Layout>
         <h1>安安你好</h1>
-      </MiniDrawer>
-    </>
+      </Layout>
+    </Provider>
   );
 }
